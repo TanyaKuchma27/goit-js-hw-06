@@ -15,22 +15,29 @@ function onCreateBtnRefClick() {
   createBoxes(amount);
 };
 
-
 function createBoxes(amount) {
-  const startSize = 30;
+  let size = 30;
   let result = [];
+
+  if (boxesRef.lastChild) {
+    size = parseInt(boxesRef.lastChild.style.width)+10;
+  };
+
   for (let i = 0; i < amount; i += 1) {
     const box = document.createElement('div');
-    const size = startSize + 10 * i;
-        
+            
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.background = `${getRandomHexColor()}`;
     
-    result.push(box);    
+    result.push(box);
+    
+    size += 10;
   };
+
   boxesRef.append(...result);
 };
+
  
 function destroyBoxes() {
   boxesRef.innerHTML = '';
